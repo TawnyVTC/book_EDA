@@ -1,0 +1,1960 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Análisis exploratorio &#8212; Análisis exploratorio de datos</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'EDA';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Dengue" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Análisis exploratorio de datos</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Dengue
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Análisis exploratorio</strong></a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FEDA.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/EDA.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Análisis exploratorio</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Análisis exploratorio</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports"><em>Imports</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informacion-dataset">Información dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-archivos-y-seleccion-de-variables-de-interes">Lectura de archivos y selección de variables de interes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-na">Datos NA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptivo-de-variables"><strong>Descriptivo de variables</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-informativas"><em>Variables informativas</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edad"><em>Edad</em></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grupo-de-edad-menores-a-5-anos">Grupo de edad menores a 5 años</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grupo-de-edad-mayores-a-65-anos">Grupo de edad mayores a 65 años</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lugar-de-ocurrencia"><em>Lugar de ocurrencia</em></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#departamentos">Departamentos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#municipios">Municipios</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semana"><em>Semana</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evento"><em>Evento</em></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evento-por-anos">Evento por años</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decesos-por-evento">Decesos por evento</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estado-del-caso"><em>Estado del caso</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confirmados"><em>Confirmados</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hospitalizacion"><em>Hospitalización</em></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hospitalizacion-de-pacientes-por-ano">Hospitalización de pacientes por año</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pacientes-hospitalizados-por-sexo">Pacientes Hospitalizados por sexo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pacientes-hospitalizados-por-evento">Pacientes hospitalizados por evento</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-parametricas"><strong>Pruebas paramétricas</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-chi-cuadrado">Prueba chi-cuadrado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-u">Prueba U</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="analisis-exploratorio">
+<h1><strong>Análisis exploratorio</strong><a class="headerlink" href="#analisis-exploratorio" title="Link to this heading">#</a></h1>
+<section id="imports">
+<h2><em>Imports</em><a class="headerlink" href="#imports" title="Link to this heading">#</a></h2>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Requeriments</span>
+<span class="c1">#!pip install pandas</span>
+<span class="c1">#!pip install numpy</span>
+<span class="c1">#!pip install readxl</span>
+<span class="c1">#!pip install matplotlib</span>
+<span class="c1">#!pip install seaborn</span>
+<span class="c1">#!pip install scipy</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Librerias</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">stats</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="informacion-dataset">
+<h2>Información dataset<a class="headerlink" href="#informacion-dataset" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Para el desarrollo de este informe se recolectaron datos de la plataforma SIVIGILA, en el periodo entre los años 2013-2018 sobre el Dengue en Colombia.
+Se utilizarán como los datos de entrenamiento para un modelo de clasificación.
+El conjunto de datos contiene variables que describen la información clínica de los pacientes, lugar de ocurrencia del caso y el estado de confirmación del caso.</p>
+</div>
+<p>Los datos se encuentran disponibles en:
+<a class="github reference external" href="https://github.com/Darally06/Dengue_class.git">Darally06/Dengue_class.git</a></p>
+<section id="lectura-de-archivos-y-seleccion-de-variables-de-interes">
+<h3>Lectura de archivos y selección de variables de interes<a class="headerlink" href="#lectura-de-archivos-y-seleccion-de-variables-de-interes" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Lectura</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Dengue_entre.csv&quot;</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="mi">36</span><span class="p">:</span> <span class="nb">str</span><span class="p">})</span>
+<span class="c1"># Cambiar ruta de archivo</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Correcion de tipo a DateTime de variables tipo fecha</span>
+<span class="n">columnas_fecha</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;FEC_NOT&quot;</span><span class="p">,</span> <span class="s2">&quot;FEC_CON&quot;</span><span class="p">,</span> <span class="s2">&quot;INI_SIN&quot;</span><span class="p">,</span> <span class="s2">&quot;FEC_HOS&quot;</span><span class="p">]</span>
+<span class="n">data</span><span class="p">[</span><span class="n">columnas_fecha</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">columnas_fecha</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">,</span> <span class="n">dayfirst</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">#Seleccion de variables de estudio&quot;</span>
+<span class="n">columnas</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;EDAD_AJUSTADA&quot;</span><span class="p">,</span> <span class="s2">&quot;SEXO&quot;</span><span class="p">,</span> <span class="s2">&quot;TIP_SS&quot;</span><span class="p">,</span> 
+            <span class="s2">&quot;GP_MIGRANT&quot;</span><span class="p">,</span> <span class="s2">&quot;GP_POBICFB&quot;</span><span class="p">,</span> <span class="s2">&quot;GP_GESTAN&quot;</span><span class="p">,</span> 
+            <span class="s2">&quot;AREA&quot;</span><span class="p">,</span> <span class="s2">&quot;PAIS_OCU&quot;</span><span class="p">,</span> <span class="s2">&quot;DPTO_OCU&quot;</span><span class="p">,</span> <span class="s2">&quot;MUN_OCU&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;SEMANA&quot;</span><span class="p">,</span> <span class="s2">&quot;ANO&quot;</span><span class="p">,</span> 
+            <span class="s2">&quot;EVENTO&quot;</span><span class="p">,</span> <span class="s2">&quot;TIP_CAS&quot;</span><span class="p">,</span> <span class="s2">&quot;ESTADO_FINAL&quot;</span><span class="p">,</span> <span class="s2">&quot;CASO&quot;</span><span class="p">,</span> 
+            <span class="s2">&quot;PAC_HOS&quot;</span><span class="p">,</span> <span class="s2">&quot;CON_FIN&quot;</span><span class="p">,</span> <span class="s2">&quot;confirmados&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;FEC_NOT&quot;</span><span class="p">,</span> <span class="s2">&quot;FEC_CON&quot;</span><span class="p">,</span> <span class="s2">&quot;INI_SIN&quot;</span><span class="p">,</span> <span class="s2">&quot;FEC_HOS&quot;</span>
+           <span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">columnas</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 500444 entries, 0 to 500443
+Data columns (total 23 columns):
+ #   Column         Non-Null Count   Dtype         
+---  ------         --------------   -----         
+ 0   EDAD_AJUSTADA  500420 non-null  float64       
+ 1   SEXO           500444 non-null  object        
+ 2   TIP_SS         500444 non-null  object        
+ 3   GP_MIGRANT     500444 non-null  int64         
+ 4   GP_POBICFB     500444 non-null  int64         
+ 5   GP_GESTAN      500444 non-null  int64         
+ 6   AREA           500444 non-null  int64         
+ 7   PAIS_OCU       500444 non-null  object        
+ 8   DPTO_OCU       500444 non-null  object        
+ 9   MUN_OCU        500444 non-null  object        
+ 10  SEMANA         500444 non-null  int64         
+ 11  ANO            500444 non-null  int64         
+ 12  EVENTO         500444 non-null  object        
+ 13  TIP_CAS        500444 non-null  int64         
+ 14  ESTADO_FINAL   492156 non-null  float64       
+ 15  CASO           492156 non-null  object        
+ 16  PAC_HOS        500444 non-null  int64         
+ 17  CON_FIN        500444 non-null  int64         
+ 18  confirmados    500444 non-null  int64         
+ 19  FEC_NOT        500444 non-null  datetime64[ns]
+ 20  FEC_CON        500352 non-null  datetime64[ns]
+ 21  INI_SIN        500391 non-null  datetime64[ns]
+ 22  FEC_HOS        184641 non-null  datetime64[ns]
+dtypes: datetime64[ns](4), float64(2), int64(10), object(7)
+memory usage: 87.8+ MB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>El dataset cuenta con 500444 registros, de los cuales se seleccionaron 22 variables de interés para el análisis exploratorio.</p>
+</div>
+</section>
+<section id="datos-na">
+<h3>Datos NA<a class="headerlink" href="#datos-na" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualización de datos faltantes</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">yticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución de valores nulos en las variables&quot;</span><span class="p">,</span> 
+          <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Variables&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/1fea0149664fc79a3c622348f986ff33037feeffe37a05bb4c7ed1b7e1635acb.png" src="_images/1fea0149664fc79a3c622348f986ff33037feeffe37a05bb4c7ed1b7e1635acb.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conteo de  valores NA</span>
+
+<span class="n">na_counts</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">na_percent</span><span class="o">=</span> <span class="p">(</span><span class="n">na_counts</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="n">na_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Variable&quot;</span><span class="p">:</span> <span class="n">na_counts</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="s2">&quot;Cantidad_NA&quot;</span><span class="p">:</span> <span class="n">na_counts</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="s2">&quot;Porcentaje_NA&quot;</span><span class="p">:</span> <span class="n">na_percent</span><span class="o">.</span><span class="n">values</span>
+<span class="p">})</span>
+<span class="n">na_table</span> <span class="o">=</span> <span class="n">na_table</span><span class="p">[</span><span class="n">na_table</span><span class="p">[</span><span class="s2">&quot;Cantidad_NA&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tabla de valores faltantes&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">na_table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tabla de valores faltantes
+         Variable  Cantidad_NA  Porcentaje_NA
+0   EDAD_AJUSTADA           24       0.004796
+14   ESTADO_FINAL         8288       1.656129
+15           CASO         8288       1.656129
+20        FEC_CON           92       0.018384
+21        INI_SIN           53       0.010591
+22        FEC_HOS       315803      63.104563
+</pre></div>
+</div>
+</div>
+</div>
+<p>Las variables <em>“Edad”, “Estado final”, “Caso”, “Fecha consulta”, “Fecha inicio de síntomas” y “Fecha hospitalización”</em>, presentan datos perdidos. En su mayoría el porcentaje de perdida es menor al <span class="math notranslate nohighlight">\(5\)</span>%, por lo que para efectos del análisis descriptivo no se realizará imputación de datos.</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="descriptivo-de-variables">
+<h1><strong>Descriptivo de variables</strong><a class="headerlink" href="#descriptivo-de-variables" title="Link to this heading">#</a></h1>
+<section id="variables-informativas">
+<h2><em>Variables informativas</em><a class="headerlink" href="#variables-informativas" title="Link to this heading">#</a></h2>
+<p>Variables para la caracterización de los pacientes</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sexo</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;SEXO&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SEXO
+M    52.495984
+F    47.504016
+Name: proportion, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>La cantidad de pacientes masculinos y femeninos es, equilibrada, siendo un <span class="math notranslate nohighlight">\(52.5\)</span>% hombres y <span class="math notranslate nohighlight">\(47.50\)</span>% mujeres</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tipo de aseguradora</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tipo de aseguradora&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;TIP_SS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tipo de aseguradora
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TIP_SS
+C    48.953329
+S    40.877101
+N     4.069586
+E     2.977356
+P     2.797116
+I     0.325511
+Name: proportion, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>La mayor parte de los pacientes (<span class="math notranslate nohighlight">\(48.95\)</span>)% están afiliados a un carnet de salud contributivo y al carnet subsidiado (<span class="math notranslate nohighlight">\(40.87\)</span>%).</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Grupos poblacionales de interes</span>
+<span class="n">grupo_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;GP_MIGRANT&quot;</span><span class="p">,</span><span class="s2">&quot;GP_GESTAN&quot;</span><span class="p">,</span><span class="s2">&quot;GP_POBICFB&quot;</span><span class="p">]</span>
+<span class="n">conteo_grupos</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">grupo_cols</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="n">tabla_grupos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Grupo de Pertenencia&quot;</span><span class="p">:</span> <span class="n">conteo_grupos</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="s2">&quot;Cantidad de Personas&quot;</span><span class="p">:</span> <span class="n">conteo_grupos</span><span class="o">.</span><span class="n">values</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pertenencia a grupos de interés&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabla_grupos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Grupo de Pertenencia  Cantidad de Personas
+0           GP_MIGRANT                  1192
+1            GP_GESTAN                  3611
+2           GP_POBICFB                   742
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Area de ocurrencia</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;AREA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AREA
+1    81.931645
+2     9.087131
+3     8.981225
+Name: proportion, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>La mayoria de los casos (<span class="math notranslate nohighlight">\(81.9\)</span>%) ocurrieron en cabeceras municipales, un <span class="math notranslate nohighlight">\(9.1\)</span>% en centros poblados y en menor medida (<span class="math notranslate nohighlight">\(8.9\)</span>%) en zonas rurales dispersas</p>
+</section>
+<section id="edad">
+<h2><em>Edad</em><a class="headerlink" href="#edad" title="Link to this heading">#</a></h2>
+<p>Distribución de la edad y grupos etarios.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Para la variable edad se realizó un ajuste dependiendo la unidad de medida registrada. Además, se eliminaron de 19 datos inconsistentes con el resto del conjunto. Los valores registrados en tiempo en meses, semanas o días se tomarán con valor referencial de 1 año.</p>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ajuste de edades menores a un año (Representación de en días, semanas o meses, variable que representa años)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;EDAD_AJUSTADA&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;EDAD_AJUSTADA&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> 
+
+<span class="n">Q1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;EDAD_AJUSTADA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">Q3</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;EDAD_AJUSTADA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+
+
+<span class="c1"># Descripción</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variable edad de los pacientes&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;EDAD_AJUSTADA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variable edad de los pacientes
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    500420.000000
+mean         25.338596
+std          19.893978
+min           1.000000
+25%          10.000000
+50%          20.000000
+75%          37.000000
+max         114.000000
+Name: EDAD_AJUSTADA, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;EDAD_AJUSTADA&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;dodgerblue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Edad&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución de la edad&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="s2">&quot;Gráfico 1&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/0adb55c286cc5cfd51ff751ef212f1aa406c1a0dd570628c023d5f457c8f477b.png" src="_images/0adb55c286cc5cfd51ff751ef212f1aa406c1a0dd570628c023d5f457c8f477b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Valor de asimetria</span>
+<span class="n">skewness</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">skew</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;EDAD_AJUSTADA&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Valor de asimetría: </span><span class="si">{</span><span class="n">skewness</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Valor de asimetría: 0.9483503997968334
+</pre></div>
+</div>
+</div>
+</div>
+<p>En el <em>gráfico 1</em> se presenta la distribución de la edad de los pacientes. La edad varia  entre <span class="math notranslate nohighlight">\(1\)</span> y <span class="math notranslate nohighlight">\(114\)</span> años, con una media de <span class="math notranslate nohighlight">\(25\)</span> años (<span class="math notranslate nohighlight">\( \pm 19.9\)</span>). La mayor ocurrencia de casos se encuentra entre los <span class="math notranslate nohighlight">\(10\)</span> y <span class="math notranslate nohighlight">\(37\)</span> años. Se observan datos atípicos después de los <span class="math notranslate nohighlight">\(77\)</span> años, con casos puntuales de representación de personas con edad avanzada. La distribución de la edad presenta alto valor de asimetría positiva.</p>
+<section id="grupo-de-edad-menores-a-5-anos">
+<h3>Grupo de edad menores a 5 años<a class="headerlink" href="#grupo-de-edad-menores-a-5-anos" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menores de 5 años</span>
+<span class="n">menores</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;EDAD_AJUSTADA&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">]</span>
+
+<span class="c1"># Tabla</span>
+<span class="n">tabla_age</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Edad&quot;</span><span class="p">:</span> <span class="n">menores</span><span class="p">[</span><span class="s2">&quot;EDAD_AJUSTADA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="s2">&quot;Pacientes&quot;</span><span class="p">:</span> <span class="n">menores</span><span class="p">[</span><span class="s2">&quot;EDAD_AJUSTADA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="n">tabla_age</span><span class="p">[</span><span class="s2">&quot;Porcentaje&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">tabla_age</span><span class="p">[</span><span class="s2">&quot;Pacientes&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">tabla_age</span><span class="p">[</span><span class="s2">&quot;Pacientes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distribución edad de los pacientes&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabla_age</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Distribución edad de los pacientes
+   Edad  Pacientes  Porcentaje
+0   1.0      24917      36.245
+1   5.0      12202      17.749
+2   4.0      11444      16.647
+3   3.0      10412      15.146
+4   2.0       9771      14.213
+</pre></div>
+</div>
+</div>
+</div>
+<p>En el grupo etario de menores a 5 años, en su mayoría (36.34%) tienen 1 año.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">menores</span><span class="p">[</span><span class="s2">&quot;EDAD_AJUSTADA&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;mediumblue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución de Edades Menores a 5 años&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Edad&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="s2">&quot;Gráfico 2&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\danie\AppData\Local\Temp\ipykernel_15072\240503222.py:7: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+  ax.set_xticklabels([&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;])
+</pre></div>
+</div>
+<img alt="_images/d6f928f155a72481f6017731b5378682dd41d4801b7630ece0f7cbbd3f9448d9.png" src="_images/d6f928f155a72481f6017731b5378682dd41d4801b7630ece0f7cbbd3f9448d9.png" />
+</div>
+</div>
+<p>En el <em>Gráfico 2</em>, se muestra la distribución de casos para pacientes menores a <span class="math notranslate nohighlight">\(5\)</span> años.</p>
+</section>
+<section id="grupo-de-edad-mayores-a-65-anos">
+<h3>Grupo de edad mayores a 65 años<a class="headerlink" href="#grupo-de-edad-mayores-a-65-anos" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mayores de 65 años</span>
+<span class="n">mayores</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;EDAD_AJUSTADA&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">65</span><span class="p">]</span>
+<span class="c1">#mayores[&quot;EDAD_AJUSTADA&quot;].describe()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">mayores</span><span class="p">[</span><span class="s2">&quot;EDAD_AJUSTADA&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;dodgerblue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución de Edades Mayores de 65 años&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Edad&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="s2">&quot;Gráfico 3&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/d3c48bf4066179dc1677e9e41d0cbeefa74db7988988b940b23d06b5e1dfb7a0.png" src="_images/d3c48bf4066179dc1677e9e41d0cbeefa74db7988988b940b23d06b5e1dfb7a0.png" />
+</div>
+</div>
+<p>En el <em>gráfico 3</em>, diagrama de cajas y bigotes, se muestra la distribución de edad de los pacientes <strong>mayores a <span class="math notranslate nohighlight">\(65\)</span> años</strong>. El <span class="math notranslate nohighlight">\(50%\)</span> central de los datos se encuentra entre los <span class="math notranslate nohighlight">\(68\)</span> y <span class="math notranslate nohighlight">\(79\)</span> años. A partir de los <span class="math notranslate nohighlight">\(95\)</span> años, se observan valores atípicos, correspondientes a pacientes de avanzada edad.</p>
+</section>
+</section>
+<section id="lugar-de-ocurrencia">
+<h2><em>Lugar de ocurrencia</em><a class="headerlink" href="#lugar-de-ocurrencia" title="Link to this heading">#</a></h2>
+<p>Ubiciación geográfica de la ocurrencia del caso</p>
+<section id="departamentos">
+<h3>Departamentos<a class="headerlink" href="#departamentos" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla</span>
+<span class="n">tabla_dptos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Departamento&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;DPTO_OCU&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="s2">&quot;Casos&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;DPTO_OCU&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top 10 departamentos de mayor ocurrencia&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabla_dptos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Top 10 departamentos de mayor ocurrencia
+      Departamento  Casos
+0            VALLE  86298
+1        ANTIOQUIA  55248
+2        SANTANDER  50337
+3           TOLIMA  42990
+4             META  31442
+5  NORTE SANTANDER  29661
+6        ATLANTICO  24657
+7            HUILA  23393
+8     CUNDINAMARCA  18600
+9            CESAR  16456
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;DPTO_OCU&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">df_filtered</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> 
+    <span class="n">y</span><span class="o">=</span><span class="n">df_filtered</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> 
+    <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Blues_r&quot;</span><span class="p">,</span>  <span class="n">hue</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Departamentos con más casos reportados de dengue (Top 10)&quot;</span><span class="p">,</span> 
+          <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Departamento&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="s2">&quot;Gráfico 4&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/c1b160b19047b79f78e94c87bbd391aaf2ad529f6447952d54d4da76efbe8606.png" src="_images/c1b160b19047b79f78e94c87bbd391aaf2ad529f6447952d54d4da76efbe8606.png" />
+</div>
+</div>
+<p>En el <em>gráfico 4</em>, el diagrama de barras presenta los <strong>10 departamentos con mayor número de casos de Dengue en Colombia</strong>. Valle del Cauca encabeza la lista con <span class="math notranslate nohighlight">\(86,298\)</span> casos, seguido de Antioquia <span class="math notranslate nohighlight">\(55,248\)</span> y Santander <span class="math notranslate nohighlight">\(50,337\)</span>.
+Por otro lado, los departamentos con menor cantidad de casos reportados son Vaupés <span class="math notranslate nohighlight">\(54)\)</span>, San Andrés <span class="math notranslate nohighlight">\((433)\)</span>, Guaina <span class="math notranslate nohighlight">\((543)\)</span>, Vichada <span class="math notranslate nohighlight">\((838)\)</span> y los procedentes del exterior <span class="math notranslate nohighlight">\((906)\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Para el análisis demográfico, se han tomado los datos proporcionados por el censo poblacional del DANE (2018) para referenciar la cantidad de casos por población.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cargado datos</span>
+<span class="n">deptos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;C:\Users\danie\Dengue\Dengue_fill\Datos\poblacion_departamentos.xlsx&quot;</span><span class="p">)</span>
+<span class="n">deptos</span><span class="p">[</span><span class="s2">&quot;Población&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">deptos</span><span class="p">[</span><span class="s2">&quot;Población&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;Int64&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Contar los casos por departamento</span>
+<span class="n">casos_por_dpto</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;DPTO_OCU&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">casos_por_dpto</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Departamento&quot;</span><span class="p">,</span> <span class="s2">&quot;Casos&quot;</span><span class="p">]</span>
+
+<span class="n">df_final</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">casos_por_dpto</span><span class="p">,</span> <span class="n">deptos</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;Departamento&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
+
+<span class="c1"># Calcular la densidad de casos por 10,000 habitantes</span>
+<span class="n">df_final</span><span class="p">[</span><span class="s2">&quot;Densidad_Casos&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_final</span><span class="p">[</span><span class="s2">&quot;Casos&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_final</span><span class="p">[</span><span class="s2">&quot;Población&quot;</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100000</span>
+<span class="n">df_final</span> <span class="o">=</span> <span class="n">df_final</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;Densidad_Casos&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar los 10 departamentos con mayor densidad de casos</span>
+<span class="n">df_top10</span> <span class="o">=</span> <span class="n">df_final</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;Densidad_Casos&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Departamentos con mayor densidad de casos&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_top10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Departamentos con mayor densidad de casos
+       Departamento  Casos  Población  Densidad_Casos
+24         GUAVIARE   2566      73081     3511.172535
+3            TOLIMA  42990    1228763     3498.640503
+4              META  31442     919129     3420.847346
+14         CASANARE  10244     379892     2696.555863
+16         PUTUMAYO   7347     283197     2594.307143
+2         SANTANDER  50337    2008841     2505.773229
+13          QUINDIO  12621     509640     2476.453968
+7             HUILA  23393    1009548     2317.175607
+0             VALLE  86298    3789874     2277.067786
+5   NORTE SANTANDER  29661    1346806     2202.321641
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gráficar</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">df_top10</span><span class="p">[</span><span class="s2">&quot;Departamento&quot;</span><span class="p">],</span> <span class="n">x</span><span class="o">=</span><span class="n">df_top10</span><span class="p">[</span><span class="s2">&quot;Densidad_Casos&quot;</span><span class="p">],</span> <span class="n">hue</span> <span class="o">=</span> <span class="n">df_top10</span><span class="p">[</span><span class="s2">&quot;Departamento&quot;</span><span class="p">],</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Blues_r&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Densidad de Casos (por 10,000 habitantes)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Departamento&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Top 10 Departamentos con Mayor Densidad de Casos&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="s2">&quot;Gráfico 5&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/784ec7edc0c5087b21c332158d69b7b4fdb4185662d9f3b55454845f1376e8b5.png" src="_images/784ec7edc0c5087b21c332158d69b7b4fdb4185662d9f3b55454845f1376e8b5.png" />
+</div>
+</div>
+<p>El <em>gráfico 5</em>, el diagrama de barras representa los departamentos con <strong>mayor densidad de casos por cada <span class="math notranslate nohighlight">\(100,000\)</span> habitantes</strong>. Guaviare es el departamento la densidad más alta <span class="math notranslate nohighlight">\((351.12)\)</span> casos, seguido por Tolima <span class="math notranslate nohighlight">\((349.86)\)</span> y Meta <span class="math notranslate nohighlight">\((342.08)\)</span>.</p>
+<p>Es importante destacar que Guaviare, a pesar de tener a población baja (<span class="math notranslate nohighlight">\(72,081\)</span> habitantes), registra la mayor densidad de casos.<br />
+Por otro lado, Tolima y Meta, no solo están entre los 10 departamentos con mayor cantidad de casos totales, sino que tambin presentan alta carga de casos en relación con su población.<br />
+Finalmente, Casanare y Putumayo, a pesar de contar con una población relativamente baja, también presentan altos índices de densidad de casos.</p>
+</section>
+<section id="municipios">
+<h3>Municipios<a class="headerlink" href="#municipios" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabla_mun</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Mayor ocurrencia&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;MUN_OCU&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="s2">&quot;Casos&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;MUN_OCU&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top 10 municipios de mayor ocurrencia&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabla_mun</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Top 10 municipios de mayor ocurrencia
+  Mayor ocurrencia  Casos
+0             CALI  62954
+1         MEDELLIN  29978
+2           IBAGUE  17503
+3           CUCUTA  16361
+4    VILLAVICENCIO  15634
+5      BUCARAMANGA  15602
+6     BARRANQUILLA  11274
+7            NEIVA  10405
+8    FLORIDABLANCA   9245
+9        SINCELEJO   7839
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">df_filtered_mun</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;MUN_OCU&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span> <span class="n">x</span> <span class="o">=</span> <span class="n">df_filtered_mun</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df_filtered_mun</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+            <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Blues_r&quot;</span><span class="p">,</span> <span class="n">hue</span> <span class="o">=</span> <span class="n">df_filtered_mun</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">saturation</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Municipios con más casos reportados de dengue (Top 10)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Municipios&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="s2">&quot;Gráfico 6&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/043a8f44142a8c8dc071066331593f01174d9046756a8f3a37538f4dcf0117f3.png" src="_images/043a8f44142a8c8dc071066331593f01174d9046756a8f3a37538f4dcf0117f3.png" />
+</div>
+</div>
+<p>En el <em>gráfico 4</em>, el diagrama de barras presenta los <strong>10 municipios con mayor número de casos de Dengue en Colombia</strong>. Cali es la ciudad con el mayor número de casos reportados, con <span class="math notranslate nohighlight">\(62,954\)</span> observaciones, seguida por Medellín <span class="math notranslate nohighlight">\(29,978\)</span> e Ibagué <span class="math notranslate nohighlight">\(17,503\)</span>, con una diferencia significativa respecto a la primera.</p>
+</section>
+</section>
+<section id="semana">
+<h2><em>Semana</em><a class="headerlink" href="#semana" title="Link to this heading">#</a></h2>
+<p>Registro por semana epidemiológica en Colombia</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Semanas</span>
+<span class="c1"># Agrupar los casos por año</span>
+<span class="n">conteo_semanal_anual</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s2">&quot;ANO&quot;</span><span class="p">,</span> <span class="s2">&quot;SEMANA&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">año</span> <span class="ow">in</span> <span class="n">conteo_semanal_anual</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">conteo_semanal_anual</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">conteo_semanal_anual</span><span class="p">[</span><span class="n">año</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">año</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Casos de Dengue por Semana y Año&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Semana&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Número de Casos&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Año&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="s2">&quot;Gráfico 7&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/ffbe20ec0a8f643895c6a4a92c7796d5796813796d4906382bab7584e6c0eb15.png" src="_images/ffbe20ec0a8f643895c6a4a92c7796d5796813796d4906382bab7584e6c0eb15.png" />
+</div>
+</div>
+<p>El <em>gráfico 7</em>, muestra la distribución de <strong>casos por semana para cada año estudiado</strong>.<br />
+En <strong>2016</strong>, los casos registrados muestran una tendencia a la baja a lo largo del año. En contraste, en <strong>2018</strong>, los casos aumentaron con el transcurso de las semanas.<br />
+Los años <strong>2013</strong> y <strong>2014</strong> presentan mayor número de casos reportados por semana, mientras que <strong>2015</strong> se caracteriza por una alta fluctuación en el número de casos semanales. <br />
+Por otro lado, <strong>2017</strong> fue el año con menor número de casos registrados.
+ienen mayor reporte de casos por semana. En el año 2015 los casos por semanas son los que tienen mayor fluctiación y <strong>el 2017 fue el año con menor registro de datos</strong>.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># tabla</span>
+<span class="n">tabla_semana</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Semana&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;SEMANA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="s2">&quot;Casos&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;SEMANA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+<span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;Semana&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top 10 de Semanas con mayor ocurrencia&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabla_semana</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Top 10 de Semanas con mayor ocurrencia
+   Semana  Casos
+4       1  10620
+2       2  10647
+3       3  10628
+0       5  10732
+8       6  10323
+9      15  10322
+7      19  10345
+5      20  10546
+1      21  10714
+6      22  10440
+</pre></div>
+</div>
+</div>
+</div>
+<p>Las semanas con <em>mayor cantidad de casos</em> reportados se encuentran entre la semana 1 y la 6, así como en la semana 19 y la 22.
+Por otro lado, las semanas con <em>menor notificación de casos</em> corresponden al periodo entre la semana 32 y la 41.</p>
+</section>
+<section id="evento">
+<h2><em>Evento</em><a class="headerlink" href="#evento" title="Link to this heading">#</a></h2>
+<p>Clasificación entre Dengue y Dengue grave</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tabla</span>
+<span class="n">tabla_eve</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Evento&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;EVENTO&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="s2">&quot;Pacientes&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;EVENTO&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="n">tabla_eve</span><span class="p">[</span><span class="s2">&quot;Porcentaje&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">tabla_eve</span><span class="p">[</span><span class="s2">&quot;Pacientes&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">tabla_eve</span><span class="p">[</span><span class="s2">&quot;Pacientes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distribución de eventos&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabla_eve</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>         Evento  Pacientes  Porcentaje
+0        DENGUE     491637       98.24
+1  DENGUE GRAVE       8807        1.76
+</pre></div>
+</div>
+</div>
+</div>
+<p>Solo el <span class="math notranslate nohighlight">\(1.76\)</span>% de los casos es catalogado como Dengue grave.</p>
+<section id="evento-por-anos">
+<h3>Evento por años<a class="headerlink" href="#evento-por-anos" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pacientes por evento, por año</span>
+<span class="n">tabla_eve_year</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;ANO&quot;</span><span class="p">)[</span><span class="s2">&quot;EVENTO&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cantidad de eventos por año&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabla_eve_year</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cantidad de eventos por año
+EVENTO  DENGUE  DENGUE GRAVE
+ANO                         
+2013    122441          3113
+2014    105356          2619
+2015     95023          1421
+2016    100117           899
+2017     25048           236
+2018     43652           519
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Grafico evento por años</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># DENGUE</span>
+<span class="n">df_d</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;EVENTO&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;DENGUE&quot;</span><span class="p">]</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;ANO&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_d</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;EVENTO&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dodgerblue&quot;</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Pacientes Dengue por años&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Año&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Pacientes Hospitalizados&quot;</span><span class="p">)</span>
+
+<span class="c1">#DENGUE GRAVE</span>
+<span class="n">df_g</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;EVENTO&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;DENGUE GRAVE&quot;</span><span class="p">]</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;ANO&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_g</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;EVENTO&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mediumblue&quot;</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Pacientes Dengue Grave por años&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Año&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Pacientes Hospitalizados&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="s2">&quot;Gráfico 8&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/4422f08ea4f8eb92775f290056b25c16c233e98d6b332b4eb97aa7ec8f408ddb.png" src="_images/4422f08ea4f8eb92775f290056b25c16c233e98d6b332b4eb97aa7ec8f408ddb.png" />
+</div>
+</div>
+<p>En el <em>gráfico 8</em> se presenta la cantidad de pacientes hospitalizados por Dengue y Dengue Grave en Colombia, a lo largo de los años <span class="math notranslate nohighlight">\(2013\)</span> a <span class="math notranslate nohighlight">\(2018\)</span>. Para el Evento Dengue grave, del <span class="math notranslate nohighlight">\(2013\)</span> a <span class="math notranslate nohighlight">\(2017\)</span>, la cantidad de pacientes sigue una tendencia decreciente.</p>
+</section>
+<section id="decesos-por-evento">
+<h3>Decesos por evento<a class="headerlink" href="#decesos-por-evento" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Descensos por evento</span>
+<span class="n">df_decesos</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;CON_FIN&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>  
+<span class="n">tabla_decesos</span> <span class="o">=</span> <span class="n">df_decesos</span><span class="p">[</span><span class="s2">&quot;EVENTO&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">tabla_decesos</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Evento&quot;</span><span class="p">,</span> <span class="s2">&quot;Decesos&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cantidad de decesos por evento&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabla_decesos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cantidad de decesos por evento
+         Evento  Decesos
+0  DENGUE GRAVE      239
+1        DENGUE       14
+</pre></div>
+</div>
+</div>
+</div>
+<p>Solo el <span class="math notranslate nohighlight">\(0.05\)</span>% de los pacientes murieron a causa de la enfermedad.</p>
+</section>
+</section>
+<section id="estado-del-caso">
+<h2><em>Estado del caso</em><a class="headerlink" href="#estado-del-caso" title="Link to this heading">#</a></h2>
+<p>Estado de confirmación del caso por parciente: probable, confirmado por laboratorio, confirmado por nexo epidemiologico.
+Variable al inicio y al final del registro de notificación.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabla_caso</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Nombre del Caso&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;CASO&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="s2">&quot;Caso inicial&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;TIP_CAS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+    <span class="s2">&quot;Caso final&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;ESTADO_FINAL&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Estado del caso&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabla_caso</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estado del caso
+                      Nombre del Caso  Caso inicial  Caso final
+0                            Probable        386002      260957
+1          Confirmado por laboratorio        108799      205010
+2  Confirmado por Nexo Epidemiológico          5643       26189
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">est_year</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;CASO&quot;</span><span class="p">)[</span><span class="s2">&quot;ANO&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confirmación de casos por año&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">est_year</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Confirmación de casos por año
+ANO                                  2013   2014   2015   2016   2017   2018
+CASO                                                                        
+Confirmado por Nexo Epidemiológico   4491   5254   5996   7022   1306   2120
+Confirmado por laboratorio          57641  46357  32330  40931   6399  21352
+Probable                            60309  53745  56697  52164  17343  20699
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span> <span class="s2">&quot;ANO&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;ESTADO_FINAL&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mediumblue&quot;</span><span class="p">,</span> <span class="s2">&quot;deepskyblue&quot;</span><span class="p">,</span> <span class="s2">&quot;#1f77b4&quot;</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Estado final del caso por años&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Año&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Estado&quot;</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Probable&quot;</span><span class="p">,</span> <span class="s2">&quot;C. por laboratorio&quot;</span><span class="p">,</span> <span class="s2">&quot;C. por nexo&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="s2">&quot;Gráfico 9&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/e2ea708e579238f729fedfdf934a8c728d2ef2dbc03c0f28bf22c7b6aacd8a67.png" src="_images/e2ea708e579238f729fedfdf934a8c728d2ef2dbc03c0f28bf22c7b6aacd8a67.png" />
+</div>
+</div>
+<p>El <em>gráfico 9</em> muestra la distribución del estado final de los casos de Dengue en Colombia entre el 2013 y 2018, diferenciando entre los casos probables, confirmados por laboratorio y confirmados por nexo epidemiológico. Se observa entre el <span class="math notranslate nohighlight">\(2013\)</span> y <span class="math notranslate nohighlight">\(2016\)</span>, predominan los casos probables y confirmados por laboratorio, con una disminución significativa en <span class="math notranslate nohighlight">\(2017\)</span>, año con el menor número de registros. En <span class="math notranslate nohighlight">\(201\)</span>, los casos confirmados por laboratorio superan ligeramente a los probables. Los casos confirmado por nexo se mantienen en una proporción baja a lo largo de los años, creciente entre el <span class="math notranslate nohighlight">\(2013\)</span> y <span class="math notranslate nohighlight">\(2016\)</span>.</p>
+</section>
+<section id="confirmados">
+<h2><em>Confirmados</em><a class="headerlink" href="#confirmados" title="Link to this heading">#</a></h2>
+<p>Confirmación de casos por año: (1) Confirmados (0) No confirmado (0)</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabla_conf</span><span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Confirmados&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;confirmados&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="s2">&quot;Pacientes&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;confirmados&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cantidad de casos confirmados&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabla_conf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cantidad de casos confirmados
+   Confirmados  Pacientes
+0            0     263072
+1            1     237372
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conf_year</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;confirmados&quot;</span><span class="p">)[</span><span class="s2">&quot;ANO&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confirmación de casos por año&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">conf_year</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Confirmación de casos por año
+ANO           2013   2014   2015   2016   2017   2018
+confirmados                                          
+0            61147  54481  57024  52304  17417  20699
+1            64407  53494  39420  48712   7867  23472
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Graficar</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;ANO&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">hue</span> <span class="o">=</span> <span class="s2">&quot;confirmados&quot;</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;deepskyblue&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución de confirmación de casos por año&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Tipo de caso&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Confirmados&quot;</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="s2">&quot;Gráfico 10&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/6dc27e2f2a3c697155ed5d7b01273fb3777c7483f8e3a684fc760453c45f97a9.png" src="_images/6dc27e2f2a3c697155ed5d7b01273fb3777c7483f8e3a684fc760453c45f97a9.png" />
+</div>
+</div>
+<p>El <em>gráfico 10</em> muestra la distribución de la confirmación de casos por año en un periodo de <span class="math notranslate nohighlight">\(2013\)</span> a <span class="math notranslate nohighlight">\(2018\)</span>. Se observa que la cantidad de casos confirmados sigue una tendencia decreciente de <span class="math notranslate nohighlight">\(2013\)</span> a <span class="math notranslate nohighlight">\(2016\)</span>, con una caída abrupta en <span class="math notranslate nohighlight">\(2017\)</span> y un ligero aumento en 2018.Por otro lado, en los años <span class="math notranslate nohighlight">\(2014\)</span> al <span class="math notranslate nohighlight">\(2017\)</span>, la cantidad de casos <em>no</em> confirmados fue superior a la de casos confirmados.</p>
+</section>
+<section id="hospitalizacion">
+<h2><em>Hospitalización</em><a class="headerlink" href="#hospitalizacion" title="Link to this heading">#</a></h2>
+<p>Pacientes que requirieron hospitalización por enefermedad: (1) Hospitalizados (2) No Hospitalizados</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pacientes hospitalizados</span>
+
+<span class="c1"># Tabla</span>
+<span class="n">tabla_hosp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Hospitalizacion&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;PAC_HOS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+    <span class="s2">&quot;Pacientes&quot;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;PAC_HOS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="n">tabla_hosp</span><span class="p">[</span><span class="s2">&quot;Porcentaje&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">round</span><span class="p">((</span><span class="n">tabla_hosp</span><span class="p">[</span><span class="s2">&quot;Pacientes&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">tabla_hosp</span><span class="p">[</span><span class="s2">&quot;Pacientes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distribución de hospitalizados&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabla_hosp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Distribución de hospitalizados
+   Hospitalizacion  Pacientes  Porcentaje
+0                2     315801      63.104
+1                1     184643      36.896
+</pre></div>
+</div>
+</div>
+</div>
+<p>La mayor parte de los pacientes (<span class="math notranslate nohighlight">\(63.1\)</span>%), no fueron hospitalizados. Solo un <span class="math notranslate nohighlight">\(36.9\)</span>% requirio hospitalización.</p>
+<section id="hospitalizacion-de-pacientes-por-ano">
+<h3>Hospitalización de pacientes por año<a class="headerlink" href="#hospitalizacion-de-pacientes-por-ano" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pacientes hospitalizados por año|</span>
+
+<span class="c1">#Tabla</span>
+<span class="n">tabla_hosp_year</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;ANO&quot;</span><span class="p">)[</span><span class="s2">&quot;PAC_HOS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">tabla_hosp_year</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;No Hospitalizado (2)&quot;</span><span class="p">,</span> <span class="s2">&quot;Hospitalizado (1)&quot;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cantidad de pacientes hospitalizados por año&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabla_hosp_year</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cantidad de pacientes hospitalizados por año
+      No Hospitalizado (2)  Hospitalizado (1)
+ANO                                          
+2013                 49735              75819
+2014                 39345              68630
+2015                 34390              62054
+2016                 30328              70688
+2017                  9035              16249
+2018                 21810              22361
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Gráfica</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;ANO&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">hue</span> <span class="o">=</span> <span class="s2">&quot;PAC_HOS&quot;</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;dodgerblue&quot;</span><span class="p">,</span> <span class="s2">&quot;mediumblue&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribución Hospitalización de Pacientes por año&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frecuencia&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Tipo de caso&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Hospitalización&quot;</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;No&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="s2">&quot;Gráfico 11&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/a5c62bbe15250013726b10c8ecfca6178f3f2bb0f255d34a01670f507f27bd3b.png" src="_images/a5c62bbe15250013726b10c8ecfca6178f3f2bb0f255d34a01670f507f27bd3b.png" />
+</div>
+</div>
+<p>El <em>gráfico 11</em> muestra el comportamiento de hospitalización de pacientes por año. Entre <span class="math notranslate nohighlight">\(2013\)</span> y <span class="math notranslate nohighlight">\(2015\)</span>, la cantidad de pacientes No Hospitalizados mostró una tendencia descendente hasta el <span class="math notranslate nohighlight">\(2016\)</span>. En contraste, la cantidad de pacientes hospitalizados presentó una disminución continua desde <span class="math notranslate nohighlight">\(2013\)</span> hasta <span class="math notranslate nohighlight">\(2017\)</span>. Finalmente, en <span class="math notranslate nohighlight">\(2018\)</span>, ambos grupos alcanzaron un nivel similar, mostrando una distribución equitativa entre hospitalizados y no hospitalizados.</p>
+</section>
+<section id="pacientes-hospitalizados-por-sexo">
+<h3>Pacientes Hospitalizados por sexo<a class="headerlink" href="#pacientes-hospitalizados-por-sexo" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filtrar solo los pacientes hospitalizados</span>
+<span class="n">df_hosp</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;PAC_HOS&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;ANO&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">df_hosp</span><span class="p">,</span> <span class="n">hue</span> <span class="o">=</span> <span class="s2">&quot;SEXO&quot;</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;indianred&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Pacientes Hospitalizados por Año y Sexo&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Año&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Pacientes Hospitalizados&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Sexo&quot;</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Masculino&quot;</span><span class="p">,</span> <span class="s2">&quot;Femenino&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="s2">&quot;Gráfico 12&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, -0.05, &#39;Gráfico 12&#39;)
+</pre></div>
+</div>
+<img alt="_images/371f4824ba3023f0ef48b0c0003557640a6863c7808e718f90332cbba95efc39.png" src="_images/371f4824ba3023f0ef48b0c0003557640a6863c7808e718f90332cbba95efc39.png" />
+</div>
+</div>
+<p><em>Gráfico 12</em> muestra la distribución de pacientes hospitalizados según su sexo a lo largo de los años registrados. En <strong>todos</strong> los años, la cantidad de pacientes de sexo masculino supera notablemente a la de pacientes femeninos.</p>
+</section>
+<section id="pacientes-hospitalizados-por-evento">
+<h3>Pacientes hospitalizados por evento<a class="headerlink" href="#pacientes-hospitalizados-por-evento" title="Link to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tabla</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;EVENTO&quot;</span><span class="p">)[</span><span class="s2">&quot;PAC_HOS&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">tabla</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;No Hospitalizado (1)&quot;</span><span class="p">,</span> <span class="s2">&quot;Hospitalizado (2)&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hospitalización de pacientes por evento&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabla</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hospitalización de pacientes por evento
+              No Hospitalizado (1)  Hospitalizado (2)
+EVENTO                                               
+DENGUE                      176983             314654
+DENGUE GRAVE                  7660               1147
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pruebas-parametricas">
+<h1><strong>Pruebas paramétricas</strong><a class="headerlink" href="#pruebas-parametricas" title="Link to this heading">#</a></h1>
+<section id="prueba-chi-cuadrado">
+<h2>Prueba chi-cuadrado<a class="headerlink" href="#prueba-chi-cuadrado" title="Link to this heading">#</a></h2>
+<p>Para la independencia de variables</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">prueba_chi2</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">,</span> <span class="n">resultados</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Realiza la prueba de Chi-Cuadrado entre dos variables categóricas y almacena los resultados.</span>
+<span class="sd">    </span>
+<span class="sd">    Parámetros:</span>
+<span class="sd">    df          - DataFrame con los datos.</span>
+<span class="sd">    var1, var2  - Variables categóricas a analizar.</span>
+<span class="sd">    resultados  - Lista donde se almacenan los resultados.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tabla</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">var1</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">var2</span><span class="p">])</span>
+    <span class="n">chi2</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">dof</span><span class="p">,</span> <span class="n">expected</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2_contingency</span><span class="p">(</span><span class="n">tabla</span><span class="p">)</span>
+    <span class="n">decision</span> <span class="o">=</span> <span class="s2">&quot;Hay relación&quot;</span> <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mf">0.05</span> <span class="k">else</span> <span class="s2">&quot;No hay relación&quot;</span>
+    <span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">chi2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">decision</span><span class="p">])</span>
+
+<span class="n">resultados_chi2</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">comparaciones</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;PAC_HOS&quot;</span><span class="p">,</span> <span class="s2">&quot;SEMANA&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;PAC_HOS&quot;</span><span class="p">,</span> <span class="s2">&quot;SEXO&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;PAC_HOS&quot;</span><span class="p">,</span> <span class="s2">&quot;EVENTO&quot;</span><span class="p">),</span> 
+    <span class="p">(</span><span class="s2">&quot;CON_FIN&quot;</span><span class="p">,</span> <span class="s2">&quot;PAC_HOS&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;CON_FIN&quot;</span><span class="p">,</span> <span class="s2">&quot;SEMANA&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;CON_FIN&quot;</span><span class="p">,</span> <span class="s2">&quot;SEXO&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;CON_FIN&quot;</span><span class="p">,</span> <span class="s2">&quot;EVENTO&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;confirmados&quot;</span><span class="p">,</span> <span class="s2">&quot;PAC_HOS&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;confirmados&quot;</span><span class="p">,</span> <span class="s2">&quot;CON_FIN&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;confirmados&quot;</span><span class="p">,</span> <span class="s2">&quot;SEXO&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;confirmados&quot;</span><span class="p">,</span> <span class="s2">&quot;SEMANA&quot;</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="k">for</span> <span class="n">var1</span><span class="p">,</span> <span class="n">var2</span> <span class="ow">in</span> <span class="n">comparaciones</span><span class="p">:</span>
+    <span class="n">prueba_chi2</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">var1</span><span class="p">,</span> <span class="n">var2</span><span class="p">,</span> <span class="n">resultados_chi2</span><span class="p">)</span>
+<span class="n">tabla_resultados</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados_chi2</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Variable 1&quot;</span><span class="p">,</span> <span class="s2">&quot;Variable 2&quot;</span><span class="p">,</span> <span class="s2">&quot;Chi2&quot;</span><span class="p">,</span> <span class="s2">&quot;Valor p&quot;</span><span class="p">,</span> <span class="s2">&quot;Decisión&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tabla cruzada prueba chi Cuadrado&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabla_resultados</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tabla cruzada prueba chi Cuadrado
+     Variable 1 Variable 2        Chi2  Valor p         Decisión
+0       PAC_HOS     SEMANA   1543.7076   0.0000     Hay relación
+1       PAC_HOS       SEXO      0.5321   0.4657  No hay relación
+2       PAC_HOS     EVENTO   9654.7541   0.0000     Hay relación
+3       CON_FIN    PAC_HOS    281.7138   0.0000     Hay relación
+4       CON_FIN     SEMANA    108.4131   0.3640  No hay relación
+5       CON_FIN       SEXO      2.7500   0.2528  No hay relación
+6       CON_FIN     EVENTO  12583.4615   0.0000     Hay relación
+7   confirmados    PAC_HOS  20156.4926   0.0000     Hay relación
+8   confirmados    CON_FIN     87.9502   0.0000     Hay relación
+9   confirmados       SEXO    132.4649   0.0000     Hay relación
+10  confirmados     SEMANA   1172.7880   0.0000     Hay relación
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>Resultados:</em></p>
+<p>-<strong>Hospitalización:</strong><br />
+Está relacionada con la semana epidemiológica y el tipo de evento.
+Puede indicar brotes en periodos del año.</p>
+<p>-<strong>Condición final:</strong><br />
+El desenlace final se ve afectada por la hospitalización y el evento.
+Tasas de mortalidad por casos.</p>
+<p>-<strong>Casos confirmados:</strong><br />
+La hospitalización está altamente relacionada con la confirmación de casos, así como la condición final. El sexo y la semana influyen en la cantidad de casos confirmados.
+El número de confirmados cambia según la semana y afecta la hospitalización y desenlace.</p>
+<p>-<strong>Sin relación:</strong><br />
+El sexo no tiene impacto significativo en el desenlace final o en la hospitalización.
+La semana no influye en el desenlace final.</p>
+</section>
+<section id="prueba-u">
+<h2>Prueba U<a class="headerlink" href="#prueba-u" title="Link to this heading">#</a></h2>
+<p>Diferencia entre dias entre el inicio de simtomas, incidente en la hospitalización y la confirmación del caso.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">analizar_demora_consulta</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calcula la demora en consulta, filtra casos con demora &lt; 60 días</span>
+<span class="sd">    y aplica la prueba de Mann-Whitney U para hospitalización y confirmación de casos.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;Demora_Consulta&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;FEC_CON&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;INI_SIN&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">days</span>
+    <span class="n">df_filtrado</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Demora_Consulta&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">aplicar_prueba_mannwhitney</span><span class="p">(</span><span class="n">grupo1</span><span class="p">,</span> <span class="n">grupo2</span><span class="p">,</span> <span class="n">nombre_grupo</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Aplica la prueba de Mann-Whitney U y devuelve los resultados.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">grupo1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">grupo2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No hay suficientes datos para comparar </span><span class="si">{</span><span class="n">nombre_grupo</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+        <span class="n">u_stat</span><span class="p">,</span> <span class="n">p_valor</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">mannwhitneyu</span><span class="p">(</span><span class="n">grupo1</span><span class="p">,</span> <span class="n">grupo2</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s2">&quot;two-sided&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Prueba Mann-Whitney U para </span><span class="si">{</span><span class="n">nombre_grupo</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Estadístico U: </span><span class="si">{</span><span class="n">u_stat</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Valor p: </span><span class="si">{</span><span class="n">p_valor</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">p_valor</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Diferencia significativa en la demora según </span><span class="si">{</span><span class="n">nombre_grupo</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  No hay diferencia significativa en la demora según </span><span class="si">{</span><span class="n">nombre_grupo</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">u_stat</span><span class="p">,</span> <span class="n">p_valor</span>
+
+    <span class="c1"># Comparación por hospitalización</span>
+    <span class="n">grupo_hosp</span> <span class="o">=</span> <span class="n">df_filtrado</span><span class="p">[</span><span class="n">df_filtrado</span><span class="p">[</span><span class="s2">&quot;PAC_HOS&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="s2">&quot;Demora_Consulta&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">grupo_no_hosp</span> <span class="o">=</span> <span class="n">df_filtrado</span><span class="p">[</span><span class="n">df_filtrado</span><span class="p">[</span><span class="s2">&quot;PAC_HOS&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">][</span><span class="s2">&quot;Demora_Consulta&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">aplicar_prueba_mannwhitney</span><span class="p">(</span><span class="n">grupo_hosp</span><span class="p">,</span> <span class="n">grupo_no_hosp</span><span class="p">,</span> <span class="s2">&quot;Hospitalización&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Comparación por confirmación de casos</span>
+    <span class="n">grupo_conf</span> <span class="o">=</span> <span class="n">df_filtrado</span><span class="p">[</span><span class="n">df_filtrado</span><span class="p">[</span><span class="s2">&quot;confirmados&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="s2">&quot;Demora_Consulta&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">grupo_no_conf</span> <span class="o">=</span> <span class="n">df_filtrado</span><span class="p">[</span><span class="n">df_filtrado</span><span class="p">[</span><span class="s2">&quot;confirmados&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">][</span><span class="s2">&quot;Demora_Consulta&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">aplicar_prueba_mannwhitney</span><span class="p">(</span><span class="n">grupo_conf</span><span class="p">,</span> <span class="n">grupo_no_conf</span><span class="p">,</span> <span class="s2">&quot;Confirmación de Casos&quot;</span><span class="p">)</span>
+
+<span class="c1"># Llamar la función con el DataFrame</span>
+<span class="n">analizar_demora_consulta</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\danie\AppData\Local\Temp\ipykernel_15072\2385012005.py:6: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df.loc[:, &quot;Demora_Consulta&quot;] = (df[&quot;FEC_CON&quot;] - df[&quot;INI_SIN&quot;]).dt.days
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prueba Mann-Whitney U para Hospitalización:
+  Estadístico U: 31707588307.5
+  Valor p: 0.0000
+  Diferencia significativa en la demora según Hospitalización.
+
+Prueba Mann-Whitney U para Confirmación de Casos:
+  Estadístico U: 36757938149.5
+  Valor p: 0.0000
+  Diferencia significativa en la demora según Confirmación de Casos.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Los resultados de la prueba de <strong>Mann-Whitney U</strong> indican que existe una diferencia estadísticamente significativa en la demora en consulta según la hospitalización y la confirmación de casos (<em>p</em> &lt; 0.05 en ambos casos). Esto sugiere que el tiempo transcurrido entre el inicio de los síntomas y la consulta médica varía de manera importante entre pacientes hospitalizados y no hospitalizados, así como entre casos confirmados y no confirmados.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Dengue</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Análisis exploratorio</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports"><em>Imports</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#informacion-dataset">Información dataset</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lectura-de-archivos-y-seleccion-de-variables-de-interes">Lectura de archivos y selección de variables de interes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-na">Datos NA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptivo-de-variables"><strong>Descriptivo de variables</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-informativas"><em>Variables informativas</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#edad"><em>Edad</em></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grupo-de-edad-menores-a-5-anos">Grupo de edad menores a 5 años</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#grupo-de-edad-mayores-a-65-anos">Grupo de edad mayores a 65 años</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lugar-de-ocurrencia"><em>Lugar de ocurrencia</em></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#departamentos">Departamentos</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#municipios">Municipios</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semana"><em>Semana</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evento"><em>Evento</em></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evento-por-anos">Evento por años</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decesos-por-evento">Decesos por evento</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estado-del-caso"><em>Estado del caso</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confirmados"><em>Confirmados</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hospitalizacion"><em>Hospitalización</em></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hospitalizacion-de-pacientes-por-ano">Hospitalización de pacientes por año</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pacientes-hospitalizados-por-sexo">Pacientes Hospitalizados por sexo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pacientes-hospitalizados-por-evento">Pacientes hospitalizados por evento</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-parametricas"><strong>Pruebas paramétricas</strong></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-chi-cuadrado">Prueba chi-cuadrado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prueba-u">Prueba U</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Daniella Guerra & Tawny Torres
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
