@@ -18,7 +18,7 @@ https://drive.google.com/file/d/1nlnDWFGidi_wF1I7JX-MjtNbUmgFq9pq/view?usp=shari
 
 ## Desarrolladores
 * Daniella Guerra (Universidad del Norte) daniellaguerra@uninorte.edu.co
-* Tawny Torres (Universidad del Norte) tawnyt@uninorte.edu.co
+* Tawny Torres (Universidad del Norte) @uninorte.edu.co
 
 
 

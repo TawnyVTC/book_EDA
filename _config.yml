@@ -1,7 +1,7 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: Análisis exploratorio de datos
+title: Dengue en Colombia
 description: Libro de texto que desarolla un análisis exploratorio de datos sobre el Dengue
 author: Daniella Guerra & Tawny Torres
 #logo: logo.png
@@ -22,7 +22,7 @@ bibtex_bibfiles:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/TawnyVTC/book_EDA  # Online location of your book
+  url: https://github.com/executablebooks/jupyter-book  # Online location of your book
   path_to_book: docs  # Optional path to your book, relative to the repository root
   branch: master  # Which branch of the repository should be used when creating links (optional)
 
